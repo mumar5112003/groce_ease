@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "140632033053",
+    "project_id": "groce-ease-e4039",
+    "storage_bucket": "groce-ease-e4039.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140632033053:android:00d5de9833fb4825e783f4",
+        "android_client_info": {
+          "package_name": "com.example.groce_ease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140632033053-ek4vv192qk08b8svh6ofal5frequcpd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4HrTr05PVDfv78wG5EU4WAUhC8yLdoCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140632033053-ek4vv192qk08b8svh6ofal5frequcpd1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
