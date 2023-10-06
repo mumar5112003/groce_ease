@@ -2,10 +2,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:groce_ease/admin/add_product.dart';
+import 'package:groce_ease/screens/admin/add_product.dart';
 import 'package:groce_ease/auth/firebase_auth.dart';
 
-import '../models/product_model.dart';
+import '../../models/product_model.dart';
 import 'detail_screen.dart';
 import 'order_screen.dart';
 
@@ -17,6 +17,7 @@ class AdminScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AdminScreenState createState() => _AdminScreenState();
 }
 
@@ -40,7 +41,7 @@ class _AdminScreenState extends State<AdminScreen> {
       // Show a success message or perform other actions
     } catch (error) {
       // Handle error
-      print('Error refreshing products: $error');
+  
     }
   }
 
@@ -260,11 +261,12 @@ class _AdminScreenState extends State<AdminScreen> {
                                                 await ref.delete();
 
                                                 setState(() {});
+                                              // ignore: empty_catches
                                               } catch (error) {
-                                                print(
-                                                    'Error deleting product: $error');
+                                              
                                               }
 
+                                              // ignore: use_build_context_synchronously
                                               Navigator.of(context).pop();
                                             },
                                           ),

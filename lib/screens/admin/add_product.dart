@@ -8,7 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../models/product_model.dart';
+import '../../models/product_model.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({
@@ -16,6 +16,7 @@ class AddProductScreen extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddProductScreenState createState() => _AddProductScreenState();
 }
 
@@ -85,12 +86,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
         } else {
           hideLoadingIndicator(context);
           // Handle unsuccessful upload
-          print('Error uploading image');
+       
         }
       } catch (error) {
         // Handle error
         hideLoadingIndicator(context);
-        print('Error uploading image: $error');
+       
       }
     }
   }

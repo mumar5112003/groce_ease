@@ -3,12 +3,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:groce_ease/admin/admin_screen.dart';
-import 'package:groce_ease/map_screen.dart';
+import 'package:groce_ease/screens/admin/admin_screen.dart';
+import 'package:groce_ease/screens/map_screen.dart';
 import 'package:groce_ease/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../landing_screen.dart';
-import '../utils/language_controller.dart';
+import '../screens/landing_screen.dart';
+import '../controller/language_controller.dart';
 import 'otp_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -144,8 +144,9 @@ void signOutAdmin() async {
     await FirebaseAuth.instance.signOut();
     await sharedPreferences.setString('email', '');
     Get.offAll(LandingScreen());
+  // ignore: empty_catches
   } catch (error) {
-    print('Error signing out: $error');
+  
   }
 }
 

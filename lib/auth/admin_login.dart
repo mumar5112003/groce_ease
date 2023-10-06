@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/language_controller.dart';
+import '../controller/language_controller.dart';
 import 'firebase_auth.dart';
 
 class AdminLogin extends StatelessWidget {

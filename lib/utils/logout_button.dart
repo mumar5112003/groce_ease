@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../auth/firebase_auth.dart';
+import '../auth/firebase_auth.dart';
 
 class LogoutButton extends StatelessWidget {
   final bool isEnglish;

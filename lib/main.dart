@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'admin/admin_screen.dart';
+import 'screens/admin/admin_screen.dart';
 import 'firebase_options.dart';
-import 'landing_screen.dart';
-import 'home/HomeScreen.dart'; // Import the GroceryApp widget
+import 'screens/landing_screen.dart';
+import 'screens/HomeScreen.dart'; // Import the GroceryApp widget
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

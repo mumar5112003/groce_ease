@@ -5,9 +5,9 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:groce_ease/home/HomeScreen.dart';
+import 'package:groce_ease/screens/HomeScreen.dart';
 import 'package:groce_ease/auth/firebase_auth.dart';
-import 'package:groce_ease/utils/language_controller.dart';
+import 'package:groce_ease/controller/language_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MapScreen extends StatefulWidget {

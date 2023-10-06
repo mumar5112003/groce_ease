@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../auth/login_page.dart';
-import '../../utils/language_controller.dart';
+import '../../controller/language_controller.dart';
 import '../HomeScreen.dart';
-import 'logout_button.dart';
+import '../../utils/logout_button.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
