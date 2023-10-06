@@ -1,16 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:groce_ease/home/HomeScreen.dart';
 import 'package:groce_ease/auth/login_page.dart';
+import 'package:groce_ease/utils/language_controller.dart';
+import 'package:groce_ease/utils/service_area.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LanguageController extends GetxController {
-  final RxBool _isEnglish = true.obs;
-
-  bool get isEnglish => _isEnglish.value;
-
-  void toggleLanguage() {
-    _isEnglish.toggle();
-  }
-}
+import 'map_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   final PageController _pageController = PageController();
@@ -178,8 +179,90 @@ class LandingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
-                      onPressed: () {
-                        // Add your logic here
+                      onPressed: () async {
+                        // Request location permission
+                        PermissionStatus status =
+                            await Permission.location.request();
+
+                        if (status.isGranted) {
+                          // Permission granted, fetch user location
+                          Position position =
+                              await Geolocator.getCurrentPosition(
+                            desiredAccuracy: LocationAccuracy.high,
+                          );
+
+                          // Perform service area validation
+                          bool isServiceArea = checkServiceArea(
+                              position.latitude, position.longitude);
+
+                          if (isServiceArea) {
+                            List<Placemark> placemarks =
+                                await placemarkFromCoordinates(
+                              position.latitude,
+                              position.longitude,
+                            );
+
+                            String address = '';
+                            if (placemarks.isNotEmpty) {
+                              Placemark placemark = placemarks.first;
+                              String street = placemark.street ?? '';
+                              String city = placemark.administrativeArea ?? '';
+
+                              address = '$street, $city';
+                            }
+                            final sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.setString('location', address);
+                            // Navigate to home screen
+                            Get.to(HomeScreen(
+                              name: '',
+                              phoneNumber: "",
+                              isEnglish: languageController.isEnglish,
+                              location: address,
+                            ));
+                          } else {
+                            // Show pop-up if user is not in service area
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text(languageController.isEnglish
+                                    ? 'Service Not Available'
+                                    : 'سروس دستیاب نہیں'),
+                                content: Text(languageController.isEnglish
+                                    ? 'Sorry, the service is not available in your area.'
+                                    : 'معاف کیجئے، آپ کے علاقے میں خدمت دستیاب نہیں ہے۔'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(
+                                          context); // Close the dialog
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                        } else if (status.isDenied ||
+                            status.isPermanentlyDenied) {
+                          // Permission denied or permanently denied by the user
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Permission Required'),
+                              content: const Text(
+                                  'Please grant location permission to use this feature.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // Close the dialog
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -209,7 +292,9 @@ class LandingScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(const MapScreen());
+                  },
                   child: Text(
                     isEnglish
                         ? 'Set location manually'

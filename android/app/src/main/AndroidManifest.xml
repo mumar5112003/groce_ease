@@ -1,5 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.groce_ease">
+   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+   <uses-permission android:name="android.permission.CAMERA" />
+   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+   <uses-feature android:name="android.hardware.location.gps" />
+   <uses-feature android:name="android.hardware.location.network" />
    <application
         android:label="groce_ease"
         android:name="${applicationName}"
@@ -30,5 +36,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAnzIudbbmP0-TtMbG_WUC2lurRBl5BpTQ" />
     </application>
 </manifest>

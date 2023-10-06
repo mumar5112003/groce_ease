@@ -3,24 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-import 'auth.dart';
-import '../landing_screen.dart';
+import '../utils/language_controller.dart';
+import 'firebase_auth.dart';
 
 // ignore: must_be_immutable
 class OTPScreen extends StatelessWidget {
   final languageController = Get.find<LanguageController>();
   bool get isEnglish => languageController.isEnglish;
   String phoneNumber;
+  String name;
   String verificationId;
   OTPScreen({
     Key? key,
     required this.phoneNumber,
+    required this.name,
     required this.verificationId,
   }) : super(key: key);
 
   void verify(String verificationCode) {
     verifyOTP(
         phoneNumber: phoneNumber,
+        name: name,
         context: Get.context!,
         verificationId: verificationId,
         userOTP: verificationCode,
